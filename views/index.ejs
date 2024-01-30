@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kamal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .container {
+            width: 60%;
+            margin: 15vh auto;
+        }
+
+        .heading {
+            text-align: center;
+            margin-top: 6px;
+        }
+
+        .inputs-item {
+            padding: 10px 8px;
+            border: 1px solid gray;
+        }
+
+        .inputs-item label {
+            display: block;
+        }
+
+        .inputs-item input {
+            padding: 4px 2px;
+            border: none;
+            width: 100%;
+
+        }
+
+        .input-con {
+            display: flex;
+            justify-content: space-around;
+            border: 1px solid gray;
+            margin-bottom: 30px;
+            padding: 10px 10px;
+        }
+
+        #select {
+            border: none;
+            margin-right: 5px;
+        }
+
+        .left-con label {
+            display: block;
+            margin: 0px 5px;
+        }
+
+        .right-con input {
+            padding: 2px 0px;
+            border: none;
+
+        }
+
+        .right-con label {
+            display: block;
+        }
+
+        .buttons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .buttons .add-svg {
+            position: relative;
+            top: 3px;
+            right: 3px;
+        }
+
+        .buttons .del-svg {
+            position: relative;
+            top: 3px;
+            right: 3px;
+        }
+
+        .Add-item {
+            font-weight: bolder;
+            background-color: rgb(72, 65, 65);
+            padding: 9.5px 20px;
+            margin: 0px 2px;
+            border: none;
+            color: white;
+
+        }
+
+        .Add-item:hover {
+            background-color: rgb(63, 241, 63);
+            color: white;
+            transition: all 0.8s;
+        }
+
+        .Delete-item {
+            background-color: red;
+            padding: 10px 10px;
+            border: none;
+            font-weight: bolder;
+            color: white;
+        }
+
+        .Delete-item:hover {
+            background-color: rgb(241, 241, 63);
+            color: rgb(23, 22, 22);
+            transition: all 0.5s;
+        }
+
+        .result-con {
+            width: 60%;
+            margin: auto;
+            border: 1px solid rgb(234, 219, 219);
+        }
+
+        .content {
+            display: flex;
+            padding: 10px 2px;
+            position: relative;
+            margin: 2px;
+        }
+        .content input {
+            margin: 0px 4px;
+        }
+
+        .result-Para {
+            margin: 5px 10px;
+            width: 86%;
+            font-weight: 400;
+        }
+
+        .cate-btn {
+            display: block;
+            padding: 5px 15px;
+            width: 17%;
+            margin: 0px 50px;
+        }
+
+        .date-con {
+            position: absolute;
+            margin: -40px 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="heading">
+            <h1>TODO APP</h1>
+        </div>
+
+
+        <form action="/add/details" method="post">
+            <div class="inputs-item">
+                <label for="" id="des">DESCRIPTION</label>
+                <input type="text" name="text" id="text" placeholder="What do you need To Do?">
+            </div>
+            <div class="input-con">
+                <div class="left-con">
+                    <label for="">CATEGORY</label>
+                    <select name="select" id="select">
+                        <option value="">Choose a Category</option>
+                        <option value="Reading">Reading</option>
+                        <option value="Practice">Practice</option>
+                        <option value="Coding">Coding</option>
+                        <option value="Project">Project</option>
+                    </select>
+                </div>
+                <div class="right-con">
+                    <label for="">DUE DATE</label>
+                    <input type="date" name="date" id="date">
+                </div>
+            </div>
+            <div class="buttons">
+                <button class="Add-item" type="submit"><svg class="add-svg" xmlns="http://www.w3.org/2000/svg"
+                        height="17" width="17"
+                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                        <path
+                            d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32V224H48c-17.7 0-32 14.3-32 32s14.3 32 32 32H192V432c0 17.7 14.3 32 32 32s32-14.3 32-32V288H400c17.7 0 32-14.3 32-32s-14.3-32-32-32H256V80z" />
+                    </svg>ADD TASK</button>
+            </div>
+        </form>
+       
+    </div>
+
+
+    <div class="result-con">
+        <% for(let i of fatchTodoData){%>
+            <div class="content">
+                <p class="result-Para">
+                    <%= i.text %>
+                </p>
+                <button class="cate-btn">
+                    <%= i.select %>
+                </button>
+                <a href="/detele/data/<%= i._id %>"> <button class="Delete-item"  ><svg class="del-svg" xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                    viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                    <path
+                        d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                </svg>DELETE TASKS</button></a>
+            </div>
+            <div class="date-con">
+                <p class="item-date"><svg xmlns="http://www.w3.org/2000/svg" height="16" width="14"
+                        viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.-->
+                        <path
+                            d="M128 0c17.7 0 32 14.3 32 32V64H288V32c0-17.7 14.3-32 32-32s32 14.3 32 32V64h48c26.5 0 48 21.5 48 48v48H0V112C0 85.5 21.5 64 48 64H96V32c0-17.7 14.3-32 32-32zM0 192H448V464c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V192zm64 80v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm128 0v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H208c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V272c0-8.8-7.2-16-16-16H336zM64 400v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H80c-8.8 0-16 7.2-16 16zm144-16c-8.8 0-16 7.2-16 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H208zm112 16v32c0 8.8 7.2 16 16 16h32c8.8 0 16-7.2 16-16V400c0-8.8-7.2-16-16-16H336c-8.8 0-16 7.2-16 16z" />
+                    </svg>
+                    <%= i.date %>
+                </p>
+
+            </div>
+            <hr width="100%">
+            <%}%>
+    </div>
+    <script src="https://kit.fontawesome.com/b006fd11ae.js" crossorigin="anonymous"></script>
+</body>
+
+</html>
